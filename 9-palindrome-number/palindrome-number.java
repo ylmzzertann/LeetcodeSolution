@@ -1,5 +1,6 @@
 class Solution {
     public boolean isPalindrome(int x) {
+        //tersine cevir
         if (x < 0) return false;
 
         int original = x, reversed = 0;
