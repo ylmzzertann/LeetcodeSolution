@@ -4,7 +4,7 @@ class Solution {
         int currentSum = nums[0];
 
         for (int i = 1; i < nums.length; i++) {
-            // Ya yeni elemanla başla, ya da mevcut toplama ekle
+            
             currentSum = Math.max(nums[i], currentSum + nums[i]);
             maxSoFar = Math.max(maxSoFar, currentSum);
         }
