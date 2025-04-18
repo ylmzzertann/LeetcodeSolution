@@ -1,32 +1,34 @@
 class Solution {
     public String multiply(String num1, String num2) {
-        // Eğer biri 0 ise sonuç direkt "0" olur
         if (num1.equals("0") || num2.equals("0")) return "0";
 
         int m = num1.length(), n = num2.length();
-        int[] result = new int[m + n]; // en fazla m + n basamak olabilir
+        int[] res = new int[m + n];
 
-        // Ters sırayla çarpma işlemi
+        char[] a = num1.toCharArray();
+        char[] b = num2.toCharArray();
+
         for (int i = m - 1; i >= 0; i--) {
-            int digit1 = num1.charAt(i) - '0';
+            int d1 = a[i] - '0';
             for (int j = n - 1; j >= 0; j--) {
-                int digit2 = num2.charAt(j) - '0';
+                int d2 = b[j] - '0';
+                int mul = d1 * d2;
+                int sum = mul + res[i + j + 1];
 
-                int mul = digit1 * digit2;
-                int sum = mul + result[i + j + 1]; // Önceki kalanla topla
-
-                result[i + j + 1] = sum % 10;             // basamak
-                result[i + j] += sum / 10;                // elde
+                res[i + j + 1] = sum % 10;
+                res[i + j] += sum / 10;
             }
         }
 
-        // Sonucu string'e çevirme
+        // İlk sıfırları atla
+        int start = 0;
+        while (start < res.length && res[start] == 0) {
+            start++;
+        }
+
         StringBuilder sb = new StringBuilder();
-        for (int num : result) {
-            // Başta gelen sıfırları atla
-            if (!(sb.length() == 0 && num == 0)) {
-                sb.append(num);
-            }
+        for (int i = start; i < res.length; i++) {
+            sb.append(res[i]);
         }
 
         return sb.toString();
