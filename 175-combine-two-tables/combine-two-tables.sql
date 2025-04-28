@@ -1,11 +1,10 @@
 SELECT 
-    p.firstName,
-    p.lastName,
-    a.city,
-    a.state
+    Person.firstName,
+    Person.lastName,
+    Address.city,
+    Address.state
 FROM 
-    Person p
+    Person
 LEFT JOIN 
-    Address a
-ON 
-    p.personId = a.personId;
+    Address
+USING (personId);
