@@ -7,15 +7,15 @@ class Solution {
 
     private void backtrack(int[] candidates, int target, int start, List<Integer> current, List<List<Integer>> result) {
         if (target == 0) {
-            result.add(new ArrayList<>(current));  // çözüm bulundu
+            result.add(new ArrayList<>(current));  
             return;
         }
 
         for (int i = start; i < candidates.length; i++) {
             if (candidates[i] <= target) {
-                current.add(candidates[i]);  // adayı seç
-                backtrack(candidates, target - candidates[i], i, current, result);  // aynı elemanı tekrar dene
-                current.remove(current.size() - 1);  // geri al (backtrack)
+                current.add(candidates[i]);  
+                backtrack(candidates, target - candidates[i], i, current, result);  
+                current.remove(current.size() - 1); 
             }
         }
     }
