@@ -16,7 +16,7 @@ class Solution {
             if (isPalindrome(substring)) {
                 path.add(substring);
                 backtrack(s, end, path, result);
-                path.remove(path.size() - 1);  // backtrack
+                path.remove(path.size() - 1);
             }
         }
     }
