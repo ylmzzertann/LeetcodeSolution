@@ -8,7 +8,6 @@ class Solution {
             result.append(reversed).append(" ");
         }
 
-        // Remove the last extra space
         return result.toString().trim();
     }
 }
