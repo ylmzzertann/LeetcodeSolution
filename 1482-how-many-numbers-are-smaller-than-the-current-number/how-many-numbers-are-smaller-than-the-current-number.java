@@ -19,12 +19,10 @@ class Solution {
         for (int i = 0; i < n; i++) {
             int num = nums[i];
 
-            // Eğer sayı 0 ise, ondan küçük sayı yoktur.
+
             if (num == 0) {
                 result[i] = 0;
             } else {
-                // Bir sayıdan küçük olanların adedi, kümülatif toplam dizisindeki
-                // kendisinden bir önceki indekste saklanan değerdir.
                 result[i] = counts[num - 1];
             }
         }
