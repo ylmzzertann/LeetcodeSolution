@@ -1,33 +1,24 @@
-import java.util.*;
-
 class Solution {
     public boolean isIsomorphic(String s, String t) {
+        if (s == t) return true;
+        if (s == null || t == null) return false;
         if (s.length() != t.length()) return false;
 
-        Map<Character, Character> mapST = new HashMap<>();
-        Map<Character, Character> mapTS = new HashMap<>();
+        // Use 256 for extended ASCII. For full Unicode, use HashMap-based method above.
+        int[] lastS = new int[256];
+        int[] lastT = new int[256];
 
+        // Initialize to 0. We'll store (index + 1) as marker to differentiate from default zero.
         for (int i = 0; i < s.length(); i++) {
-            char c1 = s.charAt(i);
-            char c2 = t.charAt(i);
+            int cs = s.charAt(i);
+            int ct = t.charAt(i);
 
-            if (mapST.containsKey(c1)) {
-                if (mapST.get(c1) != c2) {
-                    return false; // farklı eşleme yapılmak isteniyor
-                }
-            } else {
-                mapST.put(c1, c2);
-            }
+            if (lastS[cs] != lastT[ct]) return false;
 
-            if (mapTS.containsKey(c2)) {
-                if (mapTS.get(c2) != c1) {
-                    return false; // ters yönde çakışma
-                }
-            } else {
-                mapTS.put(c2, c1);
-            }
+            // store i+1 as last seen position
+            lastS[cs] = i + 1;
+            lastT[ct] = i + 1;
         }
-
         return true;
     }
 }
