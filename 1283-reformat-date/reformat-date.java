@@ -1,33 +1,46 @@
-import java.util.HashMap;
-import java.util.Map;
-
 class Solution {
     public String reformatDate(String date) {
-        // Step 1: Split the date string by space
-        String[] parts = date.split(" ");
-        String dayRaw = parts[0];
-        String monthRaw = parts[1];
-        String year = parts[2];
+        StringBuilder sb = new StringBuilder();
+        int len = date.length();
 
-        // Step 2: Create a map for month conversion
-        Map<String, String> monthMap = new HashMap<>();
-        monthMap.put("Jan", "01"); monthMap.put("Feb", "02"); monthMap.put("Mar", "03");
-        monthMap.put("Apr", "04"); monthMap.put("May", "05"); monthMap.put("Jun", "06");
-        monthMap.put("Jul", "07"); monthMap.put("Aug", "08"); monthMap.put("Sep", "09");
-        monthMap.put("Oct", "10"); monthMap.put("Nov", "11"); monthMap.put("Dec", "12");
-        
-        String month = monthMap.get(monthRaw);
+        // 1. Adım: Yıl (Her zaman son 4 karakterdir)
+        sb.append(date.substring(len - 4));
+        sb.append('-');
 
-        // Step 3: Format the day
-        // Remove the last 2 characters (st, nd, rd, th)
-        String day = dayRaw.substring(0, dayRaw.length() - 2);
-        
-        // Add leading zero if single digit
-        if (day.length() == 1) {
-            day = "0" + day;
+        // 2. Adım: Ay (Yıldan önceki boşluğu atlayıp, 3 harfli ayı alırız)
+        // Ay her zaman sondan 8. karakter ile 5. karakter arasındadır.
+        String monthStr = date.substring(len - 8, len - 5);
+        sb.append(getMonth(monthStr));
+        sb.append('-');
+
+        // 3. Adım: Gün
+        // Eğer tarih 13 karakterse gün 2 hanelidir (örn: "20th Oct 2052")
+        // Eğer tarih 12 karakterse gün 1 hanelidir (örn: "6th Jun 1933")
+        if (len == 13) {
+            sb.append(date.substring(0, 2));
+        } else {
+            sb.append('0').append(date.charAt(0));
         }
 
-        // Step 4: Return formatted string
-        return year + "-" + month + "-" + day;
+        return sb.toString();
+    }
+
+    // Switch-case, HashMap'ten çok daha hızlı çalışır
+    private String getMonth(String month) {
+        switch (month) {
+            case "Jan": return "01";
+            case "Feb": return "02";
+            case "Mar": return "03";
+            case "Apr": return "04";
+            case "May": return "05";
+            case "Jun": return "06";
+            case "Jul": return "07";
+            case "Aug": return "08";
+            case "Sep": return "09";
+            case "Oct": return "10";
+            case "Nov": return "11";
+            case "Dec": return "12";
+            default: return "";
+        }
     }
 }
