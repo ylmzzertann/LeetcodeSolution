@@ -4,7 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        stack = [-1]  # Base case to handle valid substrings starting at index 0
+        stack = [-1]  
         max_len = 0
         
         for i, char in enumerate(s):
