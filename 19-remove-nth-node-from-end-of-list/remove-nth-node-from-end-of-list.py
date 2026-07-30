@@ -21,7 +21,7 @@ class Solution(object):
         for _ in range(n + 1):
             fast = fast.next
 
-        # Move both pointers until fast reaches the end
+        # Move both pointers until fast reaches the end*
         while fast:
             fast = fast.next
             slow = slow.next
